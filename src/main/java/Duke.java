@@ -21,9 +21,6 @@ public class Duke {
         //int count = 0;
         TaskList taskList = new TaskList();
 
-
-
-
         while (true) {
             input = in.nextLine();
 
@@ -38,13 +35,11 @@ public class Duke {
                 System.out.println(line);
                 break;
             }
-                // add new task into arraylist.
+            // add new task into arraylist.
             System.out.println(line);
             taskList.addTask(input);
             System.out.println(line);
                 //System.out.println(line + input + "\n" + line);
-
-
 
         }
 
