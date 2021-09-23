@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
@@ -19,7 +21,14 @@ public class Duke {
 
         //String[] list = new String[100];
         //int count = 0;
+
+
         TaskList taskList = new TaskList();
+        //List<TaskList> taskList = new ArrayList<>();
+
+        //Add Class task
+        //Task t = new Task("read book");
+
 
         while (true) {
             input = in.nextLine();
@@ -33,12 +42,23 @@ public class Duke {
                 System.out.println(line);
                 taskList.printList();
                 System.out.println(line);
-                break;
+                //break;
+            } else if(input.substring(0,4).equals("done")
+                    && Integer.parseInt(input.substring(5)) <= taskList.count){
+                // mark Task as Done.
+                int taskNo = Integer.parseInt(input.substring(5)) - 1;
+                System.out.println(line);
+                taskList.markedAsDone(taskNo);
+                System.out.println(line);
+                //input = in.nextLine();
+
+            }else{
+                // add new task into arraylist.
+                System.out.println(line);
+                taskList.addTask(input);
+                System.out.println(line);
             }
-            // add new task into arraylist.
-            System.out.println(line);
-            taskList.addTask(input);
-            System.out.println(line);
+
                 //System.out.println(line + input + "\n" + line);
 
         }
