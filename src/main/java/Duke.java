@@ -25,7 +25,7 @@ public class Duke {
 
         TaskList taskList = new TaskList();
         //List<TaskList> taskList = new ArrayList<>();
-        
+
 
         while (true) {
             input = in.nextLine();
@@ -82,6 +82,16 @@ public class Duke {
 
                 System.out.println(line);
                 taskList.addTaskAsEvent(task, at);
+                System.out.println(line);
+
+
+            } else if (input.startsWith("delete")
+                    && Integer.parseInt(input.substring(7)) <= taskList.count) {
+                // delete task
+                int taskNo = Integer.parseInt(input.substring(7)) - 1;
+
+                System.out.println(line);
+                taskList.delTask(taskNo);
                 System.out.println(line);
 
 

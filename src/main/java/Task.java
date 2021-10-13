@@ -40,6 +40,7 @@ public class Task {
 
     }
 
+
     public String toString(){ // for toString in subclass
         return "[" + this.getStatusIcon() + "] " + this.description;
         //System.out.println("[" + this.getStatusIcon() + "] " + this.description);
