@@ -1,3 +1,4 @@
+package tag;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,14 +16,10 @@ public class TaskList {
         count = 0;
     }
 
-    public void addTask(String task) {
-        //this.taskList[count] = new Task(task);
-
-        Task newTask = new Task(task);
+    public void addTask(Task newTask) {
         this.taskList.add(newTask);
-
         this.count++;
-        System.out.println("Added: " + task);
+        System.out.println("Added: " + newTask.getDescription());
     }
 
     public void addTaskAsTodo(String task) {
@@ -43,7 +40,7 @@ public class TaskList {
     public void addTaskAsDeadline(String task, String by) {
         //this.taskList[count] = new Deadline(task, by);
 
-        Deadline newDdl = new Deadline(task,by);
+        Deadline newDdl = new Deadline(task, by);
         this.taskList.add(newDdl);
 
         this.count++;
@@ -85,10 +82,10 @@ public class TaskList {
         System.out.println("Nice! I've marked this task as done:\n" + this.taskList.get(taskNo));
     }
 
-    public void delTask(int taskNo){
+    public void delTask(int taskNo) {
         System.out.println("Noted. I've removed this task: \n" +
                 "\t[" + this.taskList.get(taskNo).getType() + "] "
-                +"[" + this.taskList.get(taskNo).getStatusIcon() + "]"
+                + "[" + this.taskList.get(taskNo).getStatusIcon() + "]"
                 + this.taskList.get(taskNo).getDescription());
 
         taskList.remove(taskNo);

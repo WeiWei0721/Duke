@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.File;
 
 public class Duke {
     public static void main(String[] args) {
@@ -19,9 +20,7 @@ public class Duke {
         String input;
         Scanner in = new Scanner(System.in);
 
-        //String[] list = new String[100];
-        //int count = 0;
-
+        File f = new File("")
 
         TaskList taskList = new TaskList();
         //List<TaskList> taskList = new ArrayList<>();
@@ -97,8 +96,10 @@ public class Duke {
 
             } else {
                 // add new task into arraylist.
+                Task newTask = new Task(input);
+
                 System.out.println(line);
-                taskList.addTask(input);
+                taskList.addTask(newTask);
                 System.out.println(line);
             }
 
