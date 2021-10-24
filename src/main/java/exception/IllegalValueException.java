@@ -1,2 +1,9 @@
-package PACKAGE_NAME;public class IllegalValueException {
+package exception;
+
+public class IllegalValueException extends Exception{
+
+    public IllegalValueException(String message) {
+        super(message);
+    }
+
 }

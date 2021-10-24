@@ -1,2 +1,5 @@
-package commands;public class CommandEnum {
+package commands;
+
+public enum CommandEnum {
+    LIST, DONE ,TODO, DEADLINE, EVENT, DELETE, BYE
 }

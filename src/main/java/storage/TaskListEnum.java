@@ -1,2 +1,5 @@
-package storage;public class TaskListEnum {
+package storage;
+
+public enum TaskListEnum {
+    T, D, E
 }

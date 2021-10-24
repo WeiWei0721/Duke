@@ -1,6 +1,7 @@
-package tag;
+package task;
 import java.util.ArrayList;
 import java.util.List;
+import exception.*;
 
 public class TaskList {
     //public String[] taskList = new String[100];
@@ -17,9 +18,13 @@ public class TaskList {
     }
 
     public void addTask(Task newTask) {
+//            throws DuplicateTaskException{
+//        if(contains(newTask)){
+//            throw new DuplicateTaskException();
+//        }
         this.taskList.add(newTask);
         this.count++;
-        System.out.println("Added: " + newTask.getDescription());
+        //System.out.println("Added: " + newTask.getDescription());
     }
 
     public void addTaskAsTodo(String task) {
@@ -82,7 +87,7 @@ public class TaskList {
         System.out.println("Nice! I've marked this task as done:\n" + this.taskList.get(taskNo));
     }
 
-    public void delTask(int taskNo) {
+    public void delTask(int taskNo) { //missing TaskNotFoundException ,handle later, after message settle
         System.out.println("Noted. I've removed this task: \n" +
                 "\t[" + this.taskList.get(taskNo).getType() + "] "
                 + "[" + this.taskList.get(taskNo).getStatusIcon() + "]"
@@ -93,5 +98,30 @@ public class TaskList {
         System.out.println("Now you have " + count + " tasks in the list.");
 
     }
+
+    public int getSize(){
+        return count;
+    }
+
+    public void clear() {taskList.clear();}
+
+    public boolean contains(Task toCheck){
+        for(Task task : taskList){
+            if(task.isSameTask(toCheck)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static class DuplicateTaskException extends DuplicateDataException{
+        protected DuplicateTaskException(){
+            super("Operation would result in duplicate task");
+        }
+    }
+
+    public static class TaskNotFoundException extends Exception {}
+
+
 
 }

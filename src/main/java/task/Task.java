@@ -1,3 +1,5 @@
+package task;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -44,6 +46,19 @@ public class Task {
     public String toString(){ // for toString in subclass
         return "[" + this.getStatusIcon() + "] " + this.description;
         //System.out.println("[" + this.getStatusIcon() + "] " + this.description);
+    }
+
+    /**
+     * returns ture if both tasks have the same identify fields (description )
+     */
+    public boolean isSameTask(Task other){
+        return other == this
+                || (other != null
+                    && other.getDescription().equals(this.getDescription())
+//                    && other.getType().equals(this.getType())
+//                    && other.getStatusIcon().equals(this.getStatusIcon())
+//
+        );
     }
 
 }
