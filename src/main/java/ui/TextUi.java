@@ -92,8 +92,6 @@ public class TextUi {
     }
 
 
-
-
     public void showToUser(String... message) {
         for (String m : message) {
             System.out.println(m);
@@ -107,10 +105,22 @@ public class TextUi {
 
     public void showNewAddedTask(){
         showToUser(
-                LINE,
                 MESSAGE_NEW_TASK_ADDED
         );
 
+    }
+
+    public void showMarkDoneTask(Task task){
+        showToUser(
+                MESSAGE_TASK_MARK_DONE,
+                task.toString()
+        );
+    }
+
+    public void showDeleTask(){
+        showToUser(
+                MESSAGE_DELE_TASK_DONE
+        );
     }
 
     public void printAllTasks(List<Task> taskList){
@@ -119,25 +129,42 @@ public class TextUi {
         }
     }
 
+    public void showCommands(List<String> commandList){
+        for(int i=0; i<commandList.size();i++){
+            System.out.println(i+1+". "+commandList.get(i));
+        }
+    }
 
 
-    public void printTask(String task){
-        out.println("\t" + task);
+    public void printTask(Task task){
+        out.println("\t"
+//                +"["+task.getType()+"]"
+//                +"["+task.getStatusIcon()+"]"
+                +task);
     }
 
     public void printTaskCount(int count){
         String taskCount = String.format(MESSAGE_TASKLIST_COUNT,count);
         showToUser(
-                LINE,
                 taskCount
         );
     }
 
-   public void printAddTask(String task,int count){
+   public void printAddTask(Task task,int count){
         showNewAddedTask();
         printTask(task);
         printTaskCount(count);
 
+   }
+
+   public void printDeleTask(Task task,int count){
+        showDeleTask();
+        printTask(task);
+        printTaskCount(count);
+   }
+
+   public void showFindTaskByKeywords(List<Task> taskFound){
+        printAllTasks(taskFound);
    }
 
 

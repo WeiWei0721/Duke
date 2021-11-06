@@ -1,8 +1,10 @@
 package storage;
 
 import exception.*;
+import parser.Parser;
 import task.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -56,14 +58,14 @@ public class TaskListDecoder {
             }
         }else if(taskType.equals(TaskListEnum.D.toString())){
             //Deadline Task.
-            String by = data[3].trim();
-            newTask = new Deadline(taskDescription,by);
+            LocalDateTime by = Parser.parseStringDateTimeFromText(data[3].trim());
+            newTask = new Deadline(taskDescription, by);
             if(taskStatus.equals("1")){
                 newTask.markedAsDone();
             }
         }else if(taskType.equals(TaskListEnum.E.toString())){
             //Event Task.
-            String at = data[3].trim();
+            LocalDateTime at = Parser.parseStringDateTimeFromText(data[3].trim());
             newTask = new Event(taskDescription,at);
             if(taskStatus.equals("1")){
                 newTask.markedAsDone();

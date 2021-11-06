@@ -1,14 +1,14 @@
 package task;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Task {
     protected String description;
     protected boolean isDone;
     protected String type;
 
-    public Task() {
-
-    }
-
+    //public Task() { }
 
     public Task(String description) {
         this.description = description;
@@ -24,18 +24,21 @@ public class Task {
         return description;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    /**
+     * Retrieves a listing of every word in the name, in order.
+     */
+    public List<String> getWordsInTask(){
+        return Arrays.asList(description.split("\\s+"));
     }
+
+//    public void setType(String type) {
+//        this.type = type;
+//    }
 
     public String getType() {
         return type;
     }
 
-
-//    public void description(String description){
-//        this.description = description;
-//    }
 
     public void markedAsDone() {
         this.isDone = true;

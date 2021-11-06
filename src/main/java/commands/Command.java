@@ -10,7 +10,14 @@ public abstract class Command {
 
     public Command(){ }
 
-    public abstract void execute(TaskList taskList, TextUi ui, StorageFile storage) throws Exception; // throw Exception
+    public abstract void execute(TaskList taskList, TextUi ui, StorageFile storage) throws Exception;
+
+    /**
+     * Executes the command and returns the result.
+     */
+    public CommandResult execute(){
+        throw new UnsupportedOperationException();
+    }
 
     public boolean isExit(){ return this.isExit;}
 
