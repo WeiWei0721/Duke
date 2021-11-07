@@ -14,7 +14,6 @@ import java.util.Scanner;
 
 
 import task.*;
-//import TaskList;
 
 /**
  * Represents the file used to store task list data.
@@ -80,10 +79,6 @@ public class StorageFile {
      */
 
     public TaskList load() throws StorageOperationException {
-
-//        if(!Files.exists(path) || !Files.isRegularFile(path)) {
-//            return new TaskList();
-//        }
         Init();
 
         try {

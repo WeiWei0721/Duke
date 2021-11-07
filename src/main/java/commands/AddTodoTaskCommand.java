@@ -26,7 +26,7 @@ public class AddTodoTaskCommand extends Command{
     public void execute(TaskList taskList, TextUi ui, StorageFile storage) throws StorageFile.StorageOperationException {
         //taskList.addTaskAsTodo(task);
         taskList.addTask(task);
-        storage.save(task);//getLatesAddedTask?
+        storage.save(task);
         ui.printAddTask(task, taskList.getSize());
 
     }

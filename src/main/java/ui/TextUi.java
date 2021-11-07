@@ -54,7 +54,7 @@ public class TextUi {
     public void showWelcome() {
         showToUser(
                 LINE,
-                MESSAGE_HELLO,
+                ///MESSAGE_HELLO,
                 LEGO,
                 MESSAGE_WELCOME,
                 LINE);
@@ -138,8 +138,6 @@ public class TextUi {
 
     public void printTask(Task task){
         out.println("\t"
-//                +"["+task.getType()+"]"
-//                +"["+task.getStatusIcon()+"]"
                 +task);
     }
 
@@ -164,15 +162,20 @@ public class TextUi {
    }
 
    public void showFindTaskByKeywords(List<Task> taskFound){
-        printAllTasks(taskFound);
+        if(taskFound.size()>0) {
+            printAllTasks(taskFound);
+        }else{
+            showToUser(
+                    MESSAGE_TASK_FOUND_FAILED
+            );
+        }
+
    }
 
 
-
-
-
-
-
-
-
+    public void showFormatFileMessage() {
+        showToUser(
+                MESSAGE_FORMAT_TASKLIST
+        );
+    }
 }

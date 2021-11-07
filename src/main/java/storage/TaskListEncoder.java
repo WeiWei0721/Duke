@@ -82,8 +82,11 @@ public class TaskListEncoder {
         }else if(task instanceof Event){
             encodeTaskListBuilder.append(TaskListEnum.E);
             encodeTaskListBuilder = appendEncodedTask(encodeTaskListBuilder,task);
+            encodeTaskListBuilder.append(" | ");
             Event e = (Event)task;
-            encodeTaskListBuilder.append(Parser.parseDateForStorage(e.getAt()));
+            encodeTaskListBuilder.append(Parser.parseDateForStorage(e.getStart()));
+            encodeTaskListBuilder.append(" - ");
+            encodeTaskListBuilder.append(Parser.parseDateForStorage(e.getEnd()));
         }
 //        encodeTaskListBuilder.append(task.getType());
 //        encodeTaskListBuilder.append(" | ");

@@ -15,7 +15,7 @@ public class FindCommand extends Command{
     public static final String COMMAND_WORD = CommandEnum.FIND.toString().toLowerCase();
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks that contain any of"
-            + "the specifced keywords (case-sensitive) and displays them as a list with index numbers.\n"
+            + "the specific keywords (case-sensitive) and displays them as a list with index numbers.\n"
             +"\tParameters: KEYWORD [MORE_KEYWORDS]...\n"
             +"\tExample: " + COMMAND_WORD + " book";
 

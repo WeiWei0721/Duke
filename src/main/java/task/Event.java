@@ -1,32 +1,43 @@
 package task;
 
+import commands.FormatCommand;
 import parser.Parser;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class Event extends Task {
 
-    protected LocalDateTime at;
-    protected String displayDateTime;
+    protected LocalDateTime start;
+    protected LocalDateTime end;
 
-    public Event(String description, LocalDateTime at) {
+    public Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
-        this.at = at;
+        this.start = start;
+        this.end = end;
         this.type = "E";
     }
 
-    public LocalDateTime getAt() {
-        return at;
+
+
+    public LocalDateTime getStart(){
+
+        return start;
     }
 
-    public String getDisplayDateTime(){
-        return this.displayDateTime = Parser.parseDateForDisplay(at);
+    public LocalDateTime getEnd(){
+        return end;
+    }
+
+    public String getAt() {
+        return Parser.parseDateForDisplay(getStart()) + " - " + Parser.parseDateForDisplay(getEnd());
     }
 
     @Override
     public String toString() {
 
-        return "[E]" + super.toString() + " (at: " + getDisplayDateTime() + ")";
+        return "[E]" + super.toString() + " (at: " + getAt() + ")";
     }
 
 }

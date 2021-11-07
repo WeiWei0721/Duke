@@ -20,6 +20,6 @@ public class Messages {
     public static final String MESSAGE_TASK_MARK_DONE_FAILED = "Task can not be mark as done.";
     public static final String MESSAGE_TASK_MARK_DONE = "Nice! I've marked this task as done:";
     public static final String MESSAGE_DELE_TASK_DONE = "Noted. I've removed this task: ";
-
-
+    public static final String MESSAGE_TASK_FOUND_FAILED = "☹ OOPS! No task found.";
+    public static final String MESSAGE_FORMAT_TASKLIST = "TaskList formatted!";
 }

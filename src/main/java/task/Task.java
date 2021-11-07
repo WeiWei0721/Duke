@@ -31,9 +31,6 @@ public class Task {
         return Arrays.asList(description.split("\\s+"));
     }
 
-//    public void setType(String type) {
-//        this.type = type;
-//    }
 
     public String getType() {
         return type;
@@ -48,7 +45,6 @@ public class Task {
 
     public String toString(){ // for toString in subclass
         return "[" + this.getStatusIcon() + "] " + this.description;
-        //System.out.println("[" + this.getStatusIcon() + "] " + this.description);
     }
 
     /**

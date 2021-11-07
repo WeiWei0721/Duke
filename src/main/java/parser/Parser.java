@@ -17,23 +17,20 @@ import static common.Messages.*;
 
 public class Parser {
 
-    public static final Pattern KEYWORDS_ARGS_FORMAT =
-            Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
-
     /**
      * Used for initial separation of command word and args.
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-//    public static final Pattern ADD_TASK_DATA_ARGS_FORMAT =
-//            Pattern.compile("\\b(todo)\\b (?<taskDescription>.*)|\\b(deadline|event)\\b (?<TaskDescription>.*) (\\/(?<taskDate>.*)) ");
-
     public static final Pattern ADD_DEADLINE_DATA_ARGS_FORMAT =
             Pattern.compile("(?<deadlineDescription>.*) ((\\/by)(?<deadlineDate>.*))");
 
     public static final Pattern ADD_EVENT_DATA_ARGS_FORMAT =
-            Pattern.compile("(?<eventDescription>.*) ((\\/at)/(?<EventDate>.*))");
+            Pattern.compile("(?<eventDescription>.*) (\\/at) (?<EventStartDate>.*) (\\-) (?<EventEndDate>.*)");
 
+
+    public static final Pattern KEYWORDS_ARGS_FORMAT =
+            Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
 
     /**
@@ -59,6 +56,8 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_INVALID_INPUT);
         }
 
+
+
         switch (commandEnum){
             case LIST:
                 return doPrintListCommand();
@@ -72,6 +71,8 @@ public class Parser {
                 return doDoneTaskCommand(arguments);
             case DELETE:
                 return doDeleteTaskCommand(arguments);
+            case FORMAT:
+                return doFormatTaskCommand();
             case FIND:
                 return doPrepareFindTaskCommand(arguments);
             case HELP:
@@ -84,8 +85,12 @@ public class Parser {
 
     }
 
+    private Command doFormatTaskCommand() {
+        return new FormatCommand();
+    }
+
     private Command doPrepareFindTaskCommand(String arguments) {
-        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(arguments.toLowerCase().trim());
         if(!matcher.matches()){
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,FindCommand.MESSAGE_USAGE));
         }
@@ -111,19 +116,31 @@ public class Parser {
      * @return the prepared command
      */
 
-    private Command doAddTodoTaskCommand(String argument){
+    private Command doAddTodoTaskCommand(String arguments){
+        if(arguments.equals("")){
+            return new IncorrectCommand(MESSAGE_EMPTY_TASK_DESC);
+        }
         try{
-            System.out.println("arguments: "+argument);
-            Task testTask = new Task(argument);
-            //testTask.toString();
-            System.out.println(testTask.toString());
-            return new AddTodoTaskCommand(new Todo(argument));
+
+//            System.out.println("arguments: "+arguments);
+//            Task testTask = new Task(argument);
+//            //testTask.toString();
+//            System.out.println(testTask.toString());
+//            final Matcher matcher = ADD_TODO_TASK_FORMAT.matcher(arguments.trim());
+//            if(!matcher.matches()){
+//                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
+//            }
+            return new AddTodoTaskCommand(new Todo(arguments));
         }catch (Exception e){
             return new IncorrectCommand(MESSAGE_EMPTY_TASK_DESC);
         }
+
     }
 
     private Command doAddDeadlineTaskCommand(String arguments) {
+        if(arguments.equals("")){
+            return new IncorrectCommand(MESSAGE_EMPTY_TASK_DESC);
+        }
         try{
             final Matcher matcher = ADD_DEADLINE_DATA_ARGS_FORMAT.matcher(arguments.trim());
             if(!matcher.matches()){
@@ -133,7 +150,7 @@ public class Parser {
             String task = matcher.group("deadlineDescription").trim();
             String by = matcher.group("deadlineDate").trim();
 
-            System.out.println(task + "\n "+ by);
+            //System.out.println(task + "\n "+ by);
 
             return new AddDeadlineTaskCommand(new Deadline(task,Parser.parseStringDateTimeFromText(by)));
         }catch (Exception e){
@@ -142,18 +159,27 @@ public class Parser {
     }
 
     private Command doAddEventTaskCommand(String arguments) {
+        if(arguments.equals("")){
+            return new IncorrectCommand(MESSAGE_EMPTY_TASK_DESC);
+        }
         try{
             final Matcher matcher = ADD_EVENT_DATA_ARGS_FORMAT.matcher(arguments.trim());
             if(!matcher.matches()){
+
                 return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
             }
 
-            String task = matcher.group("eventDescription").trim();
-            String at = matcher.group("EventDate").trim();
 
-            return new AddEventTaskCommand(new Event(task,Parser.parseStringDateTimeFromText(at)));
+            String task = matcher.group("eventDescription").trim();
+            String start = matcher.group("EventStartDate").trim();
+            String end = matcher.group("EventEndDate").trim();
+
+            //System.out.println(task + "\n " + start + end);
+
+            return new AddEventTaskCommand(new Event(task,Parser.parseStringDateTimeFromText(start),Parser.parseStringDateTimeFromText(end)));
         }catch (Exception e){
             return new IncorrectCommand(MESSAGE_EMPTY_TASK_DESC);
+
         }
 
     }
@@ -173,7 +199,7 @@ public class Parser {
         try{
             int targetIndex = Integer.parseInt(arguments);
             return new DeleteTaskCommand(targetIndex);
-        }catch (NumberFormatException nfe){
+        }catch (Exception e){
             return new IncorrectCommand(MESSAGE_INVALID_TASK_INDEX);
         }
     }

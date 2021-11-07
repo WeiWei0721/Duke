@@ -59,14 +59,20 @@ public class TaskListDecoder {
         }else if(taskType.equals(TaskListEnum.D.toString())){
             //Deadline Task.
             LocalDateTime by = Parser.parseStringDateTimeFromText(data[3].trim());
+//            System.out.println(data[3]);
+//            System.out.println(by);
             newTask = new Deadline(taskDescription, by);
             if(taskStatus.equals("1")){
                 newTask.markedAsDone();
             }
         }else if(taskType.equals(TaskListEnum.E.toString())){
             //Event Task.
-            LocalDateTime at = Parser.parseStringDateTimeFromText(data[3].trim());
-            newTask = new Event(taskDescription,at);
+            String[] times = data[3].split("[-]");
+            LocalDateTime start = Parser.parseStringDateTimeFromText(times[0].trim());
+            LocalDateTime end = Parser.parseStringDateTimeFromText(times[1].trim());
+//            System.out.println(start);
+//            System.out.println(end);
+            newTask = new Event(taskDescription,start,end);
             if(taskStatus.equals("1")){
                 newTask.markedAsDone();
             }
