@@ -1,11 +1,10 @@
 package storage;
 
-import exception.*;
-import parser.Parser;
+import exception.BusinessException;
 import task.*;
+import util.DateUtil;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,11 +17,11 @@ public class TaskListDecoder {
     /**
      * Decodes {@code encodedTaskList} into an {@code TaskList} containing the decoded tasks.
      *
-     * @throws IllegalValueException if any of the fields in any encoded task string is invalid.
+     * @throws BusinessException if any of the fields in any encoded task string is invalid.
      * @throws StorageOperationException if the {@code encodedTaskList} is in an invalid format.
      */
     public static TaskList decodeTaskList(List<String> encodedTaskList)
-        throws IllegalValueException, StorageFile.StorageOperationException{
+        throws BusinessException, StorageFile.StorageOperationException{
         final TaskList decodedTasks = new TaskList();
         for(String encodedTask : encodedTaskList){
             decodedTasks.addTask(decodeTaskListFromString(encodedTask));
@@ -38,7 +37,7 @@ public class TaskListDecoder {
 
 
     private static Task decodeTaskListFromString(String encodedTask)
-        throws IllegalValueException, StorageFile.StorageOperationException {
+        throws BusinessException, StorageFile.StorageOperationException {
         final Matcher matcher = TASK_DATA_ARGS_FORMAT.matcher(encodedTask);
         if(!matcher.matches()){
             throw new StorageFile.InvalidStorageFilePathException("Encoded task is invalid format. Unable to decode.");
@@ -58,7 +57,7 @@ public class TaskListDecoder {
             }
         }else if(taskType.equals(TaskListEnum.D.toString())){
             //Deadline Task.
-            LocalDateTime by = Parser.parseStringDateTimeFromText(data[3].trim());
+            LocalDateTime by = DateUtil.parseStringDateTimeFromText(data[3].trim());
 //            System.out.println(data[3]);
 //            System.out.println(by);
             newTask = new Deadline(taskDescription, by);
@@ -68,8 +67,8 @@ public class TaskListDecoder {
         }else if(taskType.equals(TaskListEnum.E.toString())){
             //Event Task.
             String[] times = data[3].split("[-]");
-            LocalDateTime start = Parser.parseStringDateTimeFromText(times[0].trim());
-            LocalDateTime end = Parser.parseStringDateTimeFromText(times[1].trim());
+            LocalDateTime start = DateUtil.parseStringDateTimeFromText(times[0].trim());
+            LocalDateTime end = DateUtil.parseStringDateTimeFromText(times[1].trim());
 //            System.out.println(start);
 //            System.out.println(end);
             newTask = new Event(taskDescription,start,end);

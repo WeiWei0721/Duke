@@ -1,6 +1,6 @@
 package task;
 
-import parser.Parser;
+import util.DateUtil;
 
 import java.time.LocalDateTime;
 
@@ -21,7 +21,7 @@ public class Deadline extends Task {
     }
 
     public String getDisplayDateTime() {
-        return this.displayDateTime = Parser.parseDateForDisplay(by);
+        return this.displayDateTime = DateUtil.parseDateForDisplay(by);
     }
 
     @Override

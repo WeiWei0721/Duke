@@ -1,11 +1,8 @@
 package task;
 
-import commands.FormatCommand;
-import parser.Parser;
+import util.DateUtil;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 public class Event extends Task {
 
@@ -31,7 +28,7 @@ public class Event extends Task {
     }
 
     public String getAt() {
-        return Parser.parseDateForDisplay(getStart()) + " - " + Parser.parseDateForDisplay(getEnd());
+        return DateUtil.parseDateForDisplay(getStart()) + " - " + DateUtil.parseDateForDisplay(getEnd());
     }
 
     @Override

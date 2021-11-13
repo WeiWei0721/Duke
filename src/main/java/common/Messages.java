@@ -17,10 +17,11 @@ public class Messages {
     public static final String MESSAGE_NEW_TASK_ADDED = "Got it. I've added this task: ";
     public static final String MESSAGE_TASKLIST_COUNT ="Now you have %1$d tasks in the list.";
     public static final String MESSAGE_INVALID_TASK_INDEX = "The task index provided is invalid";
-    public static final String MESSAGE_TASK_MARK_DONE_FAILED = "Task can not be mark as done.";
+    public static final String MESSAGE_TASK_MARK_DONE_FAILED = "Task already been marked as done.";
     public static final String MESSAGE_TASK_MARK_DONE = "Nice! I've marked this task as done:";
     public static final String MESSAGE_DELE_TASK_DONE = "Noted. I've removed this task: ";
     public static final String MESSAGE_TASK_FOUND_FAILED = "☹ OOPS! No task found.";
     public static final String MESSAGE_FORMAT_TASKLIST = "TaskList formatted!";
     public static final String MESSAGE_EMPTY_TASKLIST = "The TaskList is empty!";
+    public static final String MESSAGE_DATE_INVALID = "Event Start time must before End time!";
 }

@@ -1,7 +1,7 @@
 package storage;
 
 
-import exception.IllegalValueException;
+import exception.BusinessException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -88,7 +88,7 @@ public class StorageFile {
         //other errors
         }catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);
-        }catch (IllegalValueException ive) {
+        }catch (BusinessException ive) {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         }
     }
@@ -133,7 +133,7 @@ public class StorageFile {
     }
 
 
-    public static class InvalidStorageFilePathException extends IllegalValueException {
+    public static class InvalidStorageFilePathException extends BusinessException {
         public InvalidStorageFilePathException(String message) {
             super(message);
         }

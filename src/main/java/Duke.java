@@ -1,4 +1,5 @@
 import commands.Command;
+import commands.CommandEnum;
 import parser.Parser;
 import storage.StorageFile;
 import task.TaskList;
@@ -30,6 +31,7 @@ public class Duke {
     }
 
     public void run(){
+
         ui.showWelcome();
         boolean isExit = false;
         Parser p = new Parser();

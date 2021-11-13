@@ -1,23 +1,23 @@
 package commands;
 
+import exception.BusinessException;
 import storage.StorageFile;
-import task.*;
+import task.TaskList;
 import ui.TextUi;
 
-import java.nio.file.FileStore;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class HelpCommand extends Command{
+public class HelpCommand extends Command {
 
-    public static final String COMMAND_WORD = CommandEnum.HELP.toString().toLowerCase();
+    public static final String COMMAND_WORD = "help";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "\tExample: " + COMMAND_WORD;
 
     @Override
-    public void execute(TaskList taskList, TextUi ui, StorageFile storage){
+    public void execute(TaskList taskList, TextUi ui, StorageFile storage) {
         List<String> commandList = new ArrayList<>();
         commandList.add(AddTodoTaskCommand.MESSAGE_USAGE);
         commandList.add(AddDeadlineTaskCommand.MESSAGE_USAGE);
@@ -34,5 +34,18 @@ public class HelpCommand extends Command{
 
     }
 
+    @Override
+    public String getMessageUsage() {
+        return MESSAGE_USAGE;
+    }
 
+    @Override
+    public void setArguments(String arguments) throws BusinessException {
+
+    }
+
+    @Override
+    public void validateArguments(String arguments) {
+
+    }
 }
