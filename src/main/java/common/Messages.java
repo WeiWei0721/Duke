@@ -22,4 +22,5 @@ public class Messages {
     public static final String MESSAGE_DELE_TASK_DONE = "Noted. I've removed this task: ";
     public static final String MESSAGE_TASK_FOUND_FAILED = "☹ OOPS! No task found.";
     public static final String MESSAGE_FORMAT_TASKLIST = "TaskList formatted!";
+    public static final String MESSAGE_EMPTY_TASKLIST = "The TaskList is empty!";
 }

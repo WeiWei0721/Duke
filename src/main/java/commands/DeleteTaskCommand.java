@@ -1,16 +1,17 @@
 package commands;
 
-import exception.TaskNotFoundException;
+import common.Messages;
 import storage.StorageFile;
-import task.*;
+import task.Task;
+import task.TaskList;
 import ui.TextUi;
 
-public class DeleteTaskCommand extends Command{
+public class DeleteTaskCommand extends Command {
 
-    private int tarageIndex;
+    private int targetIndex;
 
-    public DeleteTaskCommand(int tarageIndex){
-        this.tarageIndex = tarageIndex;
+    public DeleteTaskCommand(int tarageIndex) {
+        this.targetIndex = tarageIndex;
     }
 
     public static final String COMMAND_WORD = CommandEnum.DELETE.toString().toLowerCase();
@@ -22,8 +23,9 @@ public class DeleteTaskCommand extends Command{
 
     @Override
     public void execute(TaskList taskList, TextUi ui, StorageFile storage) throws Exception {
-        Task deleTask = taskList.getTask(tarageIndex-1);
-        taskList.delTask(tarageIndex-1);
+        taskList.validate(targetIndex);
+        Task deleTask = taskList.getTask(targetIndex - 1);
+        taskList.delTask(targetIndex - 1);
         storage.saveTaskList(taskList.getAllTasks());
         ui.printDeleTask(deleTask, taskList.getSize());
     }

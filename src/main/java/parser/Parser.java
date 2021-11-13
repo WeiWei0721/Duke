@@ -121,15 +121,6 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_EMPTY_TASK_DESC);
         }
         try{
-
-//            System.out.println("arguments: "+arguments);
-//            Task testTask = new Task(argument);
-//            //testTask.toString();
-//            System.out.println(testTask.toString());
-//            final Matcher matcher = ADD_TODO_TASK_FORMAT.matcher(arguments.trim());
-//            if(!matcher.matches()){
-//                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
-//            }
             return new AddTodoTaskCommand(new Todo(arguments));
         }catch (Exception e){
             return new IncorrectCommand(MESSAGE_EMPTY_TASK_DESC);

@@ -1,14 +1,16 @@
 package commands;
 
-import exception.TaskNotFoundException;
+import common.Messages;
 import storage.StorageFile;
-import task.*;
+import task.TaskList;
 import ui.TextUi;
 
-public class DoneTaskCommand extends Command{
+public class DoneTaskCommand extends Command {
     private final int taskNo;
 
-    public DoneTaskCommand(int taskNo) { this.taskNo = taskNo; }
+    public DoneTaskCommand(int taskNo) {
+        this.taskNo = taskNo;
+    }
 
     public static final String COMMAND_WORD = CommandEnum.DONE.toString().toLowerCase();
 
@@ -19,6 +21,7 @@ public class DoneTaskCommand extends Command{
 
     @Override
     public void execute(TaskList taskList, TextUi ui, StorageFile storage) throws Exception {
+        taskList.validate(taskNo);
         taskList.markedAsDone(this.taskNo);
         storage.saveTaskList(taskList.getAllTasks());
         ui.showMarkDoneTask(taskList.getTask(taskNo));

@@ -1,15 +1,8 @@
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.io.File;
-import java.nio.file.Paths;
-import java.nio.file.Files;
-import storage.*;
-import ui.*;
-import task.*;
-import parser.*;
-import commands.*;
+import commands.Command;
+import parser.Parser;
+import storage.StorageFile;
+import task.TaskList;
+import ui.TextUi;
 
 public class Duke {
 
@@ -39,17 +32,16 @@ public class Duke {
     public void run(){
         ui.showWelcome();
         boolean isExit = false;
+        Parser p = new Parser();
         while(!isExit){
             try{
                 String fullCommand = ui.readCommand();
                 ui.showLine();
-                Command c = new Parser().parserCommand(fullCommand);
+                Command c = p.parserCommand(fullCommand);
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
             }catch (Exception e){
                 ui.showToUser(e.getMessage());
-                //ui.showError(e.getMessage());
-                //throw new RuntimeException(e);
             }finally {
                 ui.showLine();
             }

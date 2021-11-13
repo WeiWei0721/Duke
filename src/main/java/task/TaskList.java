@@ -1,6 +1,7 @@
 package task;
 import java.util.*;
 
+import common.Messages;
 import exception.*;
 
 
@@ -36,21 +37,20 @@ public class TaskList {
     }
 
     //@Override
-    public void markedAsDone(int taskNo) throws TaskNotFoundException {
+    public void markedAsDone(int taskNo) throws IllegalArgumentException {
         if(!contains(taskList.get(taskNo))){
-            throw new TaskNotFoundException(taskNo+1);
+            throw new IllegalArgumentException(Messages.MESSAGE_INVALID_TASK_INDEX);
         }else{
             this.taskList.get(taskNo).markedAsDone();
         }
 
     }
 
-    public void delTask(int taskNo) throws TaskNotFoundException  {
-
+    public void delTask(int taskNo) throws IllegalArgumentException  {
         if(contains(taskList.get(taskNo))){
             taskList.remove(taskNo);
         }else{
-            throw new TaskNotFoundException(taskNo);
+            throw new IllegalArgumentException(Messages.MESSAGE_INVALID_TASK_INDEX);
         }
 
     }
@@ -70,11 +70,20 @@ public class TaskList {
         return false;
     }
 
-    public Task getTask(int taskNo) throws TaskNotFoundException{
+    public Task getTask(int taskNo){
         if(contains(taskList.get(taskNo))){
             return taskList.get(taskNo);
         }else{
-            throw new TaskNotFoundException(taskNo);
+            throw new IllegalArgumentException(Messages.MESSAGE_INVALID_TASK_INDEX);
+        }
+    }
+
+    public void validate(int taskNo) {
+        if (taskList.size() == 0) {
+            throw new IllegalArgumentException(Messages.MESSAGE_EMPTY_TASKLIST);
+        }
+        if (taskNo >= taskList.size() || taskNo < 1) {
+            throw new IllegalArgumentException(Messages.MESSAGE_TASK_FOUND_FAILED);
         }
     }
 
