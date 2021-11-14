@@ -19,7 +19,7 @@ public class DateUtil {
     }
 
     public static LocalDateTime parseStringDateTimeFromText(String dataTime) throws BusinessException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm");
         try {
             return LocalDateTime.parse(dataTime, formatter);
         }catch (Exception e){
