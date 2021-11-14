@@ -25,12 +25,11 @@ public class AddDeadlineTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "deadline";
 
-    // move to MESSAGE;
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a DeadLine Task into the TaskList."
-            + "DEADLINE_DATE to be specified in the following date format -> [d/MM/yyyy HHmm]\n"
+            + "DEADLINE_DATE to be specified in the following date format -> [d/MM/yyyy HH:mm]\n"
             + "\tParameters: DEADLINE_DESCRIPTION /by DEADLINE_DATE \n"
             + "\tExample: "
-            + COMMAND_WORD + " Read book /by 01/01/2021 2359";
+            + COMMAND_WORD + " Read book /by 01/01/2021 23:59";
 
     public AddDeadlineTaskCommand() {
 

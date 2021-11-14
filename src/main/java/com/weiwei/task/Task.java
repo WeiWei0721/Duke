@@ -54,9 +54,6 @@ public class Task {
         return other == this
                 || (other != null
                     && other.getDescription().equals(this.getDescription())
-//                    && other.getType().equals(this.getType())
-//                    && other.getStatusIcon().equals(this.getStatusIcon())
-//
         );
     }
 

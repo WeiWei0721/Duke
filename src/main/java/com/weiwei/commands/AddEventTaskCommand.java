@@ -27,12 +27,11 @@ public class AddEventTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "event";
 
-    // move to MESSAGE;
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Event Task into the TaskList."
-            + "EVENT_DATE to be specified in the following date format -> [d/MM/yyyy HHmm] - [d/MM/yyyy HHmm]\n"
+            + "EVENT_DATE to be specified in the following date format -> [d/MM/yyyy HH:mm] - [d/MM/yyyy HH:mm]\n"
             + "\tParameters: EVENT_DESCRIPTION /by EVENT_START_DATE - EVENT_END_DATE  \n"
             + "\tExample: "
-            + COMMAND_WORD + " meeting /at 01/01/2021 1400 - 01/01/2021 1600";
+            + COMMAND_WORD + " meeting /at 01/01/2021 14:00 - 01/01/2021 16:00";
 
     public AddEventTaskCommand() {
 

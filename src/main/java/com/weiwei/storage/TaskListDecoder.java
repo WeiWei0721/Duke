@@ -18,12 +18,11 @@ public class TaskListDecoder {
      * Decodes {@code encodedTaskList} into an {@code TaskList} containing the decoded tasks.
      *
      * @throws BusinessException if any of the fields in any encoded task string is invalid.
-     * @throws StorageOperationException if the {@code encodedTaskList} is in an invalid format.
      */
     public static TaskList decodeTaskList(List<String> encodedTaskList)
-        throws BusinessException, StorageFile.StorageOperationException{
+            throws BusinessException, StorageFile.StorageOperationException {
         final TaskList decodedTasks = new TaskList();
-        for(String encodedTask : encodedTaskList){
+        for (String encodedTask : encodedTaskList) {
             decodedTasks.addTask(decodeTaskListFromString(encodedTask));
         }
 
@@ -37,9 +36,9 @@ public class TaskListDecoder {
 
 
     private static Task decodeTaskListFromString(String encodedTask)
-        throws BusinessException, StorageFile.StorageOperationException {
+            throws BusinessException, StorageFile.StorageOperationException {
         final Matcher matcher = TASK_DATA_ARGS_FORMAT.matcher(encodedTask);
-        if(!matcher.matches()){
+        if (!matcher.matches()) {
             throw new StorageFile.InvalidStorageFilePathException("Encoded task is invalid format. Unable to decode.");
         }
 
@@ -49,30 +48,26 @@ public class TaskListDecoder {
         String taskStatus = data[1].trim();
         String taskDescription = data[2].trim();
 
-        if(taskType.equals(TaskListEnum.T.toString())){
+        if (taskType.equals(TaskListEnum.T.toString())) {
             //Todo Task.
             newTask = new Todo(taskDescription);
-            if(taskStatus.equals("1")){
+            if (taskStatus.equals("1")) {
                 newTask.markedAsDone();
             }
-        }else if(taskType.equals(TaskListEnum.D.toString())){
+        } else if (taskType.equals(TaskListEnum.D.toString())) {
             //Deadline Task.
             LocalDateTime by = DateUtil.parseStringDateTimeFromText(data[3].trim());
-//            System.out.println(data[3]);
-//            System.out.println(by);
             newTask = new Deadline(taskDescription, by);
-            if(taskStatus.equals("1")){
+            if (taskStatus.equals("1")) {
                 newTask.markedAsDone();
             }
-        }else if(taskType.equals(TaskListEnum.E.toString())){
+        } else if (taskType.equals(TaskListEnum.E.toString())) {
             //Event Task.
             String[] times = data[3].split("[-]");
             LocalDateTime start = DateUtil.parseStringDateTimeFromText(times[0].trim());
             LocalDateTime end = DateUtil.parseStringDateTimeFromText(times[1].trim());
-//            System.out.println(start);
-//            System.out.println(end);
-            newTask = new Event(taskDescription,start,end);
-            if(taskStatus.equals("1")){
+            newTask = new Event(taskDescription, start, end);
+            if (taskStatus.equals("1")) {
                 newTask.markedAsDone();
             }
         }

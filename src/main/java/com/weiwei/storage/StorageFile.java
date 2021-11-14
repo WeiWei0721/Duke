@@ -18,26 +18,11 @@ import java.util.Scanner;
  */
 public class StorageFile {
 
-    //public static final String DEFAULT_STORAGE_FILEPATH = "data/Duke.txt";
     public final String home = System.getProperty("user.home");
     public String filePath;
     public String absoluteFilePath;
     public Path path;
 
-    /**
-     * @throws InvalidStorageFilePathException if the default path is invalid
-     */
-//    public StorageFile() throws InvalidStorageFilePathException {
-//        this(DEFAULT_STORAGE_FILEPATH);
-//    }
-
-
-//    public StorageFile(String filePath) throws InvalidStorageFilePathException {
-//        this.path = Paths.get(filePath);
-//        if (!isValidPath(path)) {
-//            throw new InvalidStorageFilePathException("Storage file should end with '.txt'");
-//        }
-//    }
 
     public StorageFile(String filePath){
         this.filePath = filePath;

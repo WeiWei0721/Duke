@@ -22,16 +22,12 @@ public class TaskListEncoder {
      * for storage.
      */
     public static void encodeTask(Task toSave, String pathOfFileToSave) throws IOException {
-        try {
-            String encodedTask = encodeTaskToString(toSave);
-            FileWriter fw = new FileWriter(pathOfFileToSave, true);
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(encodedTask);
-            bw.newLine();
-            bw.close();
-        } catch (Exception e) {
-            e.getMessage();
-        }
+        String encodedTask = encodeTaskToString(toSave);
+        FileWriter fw = new FileWriter(pathOfFileToSave, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(encodedTask);
+        bw.newLine();
+        bw.close();
     }
 
 
@@ -52,16 +48,7 @@ public class TaskListEncoder {
             bw.newLine();
         }
         bw.close();
-//        try{
-//            String encodeTask = encodeTasktoString(toSave);
-//            FileWriter fw = new FileWriter(pathOfFileToSave);
-//            BufferedWriter bw = new BufferedWriter(fw);
-//            bw.write(encodeTask);
-//            bw.newLine();
-//            bw.close();
-//        }catch (Exception e){
-//            e.getMessage();
-//        }
+
     }
 
 
@@ -75,26 +62,19 @@ public class TaskListEncoder {
         if (task instanceof Todo) {
             encodeTaskListBuilder.append(TaskListEnum.T);
             encodeTaskListBuilder = appendEncodedTask(encodeTaskListBuilder, task);
-        } else if (task instanceof Deadline) {
+        } else if (task instanceof Deadline d) {
             encodeTaskListBuilder.append(TaskListEnum.D);
             encodeTaskListBuilder = appendEncodedTask(encodeTaskListBuilder, task);
-            Deadline d = (Deadline) task;
             encodeTaskListBuilder.append(" | ");
             encodeTaskListBuilder.append(DateUtil.parseDateForStorage(d.getBy()));
-        } else if (task instanceof Event) {
+        } else if (task instanceof Event e) {
             encodeTaskListBuilder.append(TaskListEnum.E);
             encodeTaskListBuilder = appendEncodedTask(encodeTaskListBuilder, task);
             encodeTaskListBuilder.append(" | ");
-            Event e = (Event) task;
             encodeTaskListBuilder.append(DateUtil.parseDateForStorage(e.getStart()));
             encodeTaskListBuilder.append(" - ");
             encodeTaskListBuilder.append(DateUtil.parseDateForStorage(e.getEnd()));
         }
-//        encodeTaskListBuilder.append(task.getType());
-//        encodeTaskListBuilder.append(" | ");
-//        encodeTaskListBuilder.append(task.getStatusIcon().equals("X") ? "1" : 0);
-//        encodeTaskListBuilder.append(" | ");
-//        encodeTaskListBuilder.append(task.getDescription());
 
 
         return encodeTaskListBuilder.toString();
