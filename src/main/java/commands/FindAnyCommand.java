@@ -11,7 +11,7 @@ import java.util.Set;
 public class FindAnyCommand extends FindCommand{
     public static final String COMMAND_WORD = "findany";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks that contain *all* of"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks that contain *all* of "
             + "the specific keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "\tParameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "\tExample: " + COMMAND_WORD + " book";

@@ -1,11 +1,15 @@
 package commands;
 
+import common.Messages;
 import exception.BusinessException;
 import storage.StorageFile;
 import task.TaskList;
 import ui.TextUi;
 
+import java.util.regex.Pattern;
+
 public class DoneTaskCommand extends Command {
+
     private int taskNo;
 
     public DoneTaskCommand(int taskNo) {
@@ -39,7 +43,12 @@ public class DoneTaskCommand extends Command {
     @Override
     public void setArguments(String arguments) throws BusinessException {
         validateArguments(arguments);
-        int taskNo = Integer.parseInt(arguments);
+        try {
+            int taskNo = Integer.parseInt(arguments);
+        } catch (Exception e) {
+            throw new BusinessException(Messages.MESSAGE_INVALID_COMMAND_FORMAT + "\n" + getMessageUsage());
+        }
+
         this.taskNo = taskNo - 1;
     }
 

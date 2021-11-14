@@ -1,5 +1,6 @@
 package commands;
 
+import common.Messages;
 import exception.BusinessException;
 import storage.StorageFile;
 import task.Task;
@@ -42,7 +43,11 @@ public class DeleteTaskCommand extends Command {
     @Override
     public void setArguments(String arguments) throws BusinessException {
         validateArguments(arguments);
-        int targetIndex = Integer.parseInt(arguments);
-        this.targetIndex = targetIndex;
+        try {
+            this.targetIndex = Integer.parseInt(arguments);
+        } catch (Exception e) {
+            throw new BusinessException(Messages.MESSAGE_INVALID_COMMAND_FORMAT + "\n" + getMessageUsage());
+        }
+
     }
 }

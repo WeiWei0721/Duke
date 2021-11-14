@@ -7,7 +7,6 @@ import java.util.Scanner;
 import java.util.List;
 import task.*;
 
-import commands.CommandResult;
 
 import static common.Messages.*;
 

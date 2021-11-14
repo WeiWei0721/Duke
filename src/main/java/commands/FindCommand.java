@@ -21,7 +21,7 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks that contain *any* of"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks that contain *any* of "
             + "the specific keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "\tParameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "\tExample: " + COMMAND_WORD + " book";
