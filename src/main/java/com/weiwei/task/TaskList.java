@@ -82,11 +82,16 @@ public class TaskList {
         }
     }
 
-    public void validate(int taskNo) throws BusinessException {
+    /**
+     * validate the task index in java list (not task number display in ui)
+     * @param taskNo
+     * @throws BusinessException
+     */
+    public void validateTaskIndex(int taskNo) throws BusinessException {
         if (taskList.size() == 0) {
             throw new BusinessException(Messages.MESSAGE_EMPTY_TASKLIST);
         }
-        if (taskNo >= taskList.size() || taskNo < 1) {
+        if (taskNo >= taskList.size() || taskNo < 0) {
             throw new BusinessException(Messages.MESSAGE_TASK_FOUND_FAILED);
         }
     }

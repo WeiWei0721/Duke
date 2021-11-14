@@ -28,9 +28,9 @@ public class DeleteTaskCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, TextUi ui, StorageFile storage) throws Exception {
-        taskList.validate(targetIndex);
-        Task deleTask = taskList.getTask(targetIndex - 1);
-        taskList.delTask(targetIndex - 1);
+        taskList.validateTaskIndex(targetIndex);
+        Task deleTask = taskList.getTask(targetIndex);
+        taskList.delTask(targetIndex);
         storage.saveTaskList(taskList.getAllTasks());
         ui.printDeleTask(deleTask, taskList.getSize());
     }
@@ -44,7 +44,7 @@ public class DeleteTaskCommand extends Command {
     public void setArguments(String arguments) throws BusinessException {
         validateArguments(arguments);
         try {
-            this.targetIndex = Integer.parseInt(arguments);
+            this.targetIndex = Integer.parseInt(arguments) - 1;
         } catch (Exception e) {
             throw new BusinessException(Messages.MESSAGE_INVALID_COMMAND_FORMAT + "\n" + getMessageUsage());
         }

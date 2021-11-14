@@ -14,7 +14,7 @@ public class DoneTaskCommand extends Command {
         this.taskNo = taskNo;
     }
 
-    public static final String COMMAND_WORD ="done";
+    public static final String COMMAND_WORD = "done";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the task as done identified by the index number used in the last task listing.\n"
@@ -27,7 +27,7 @@ public class DoneTaskCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, TextUi ui, StorageFile storage) throws Exception {
-        taskList.validate(taskNo);
+        taskList.validateTaskIndex(taskNo);
         taskList.markedAsDone(this.taskNo);
         storage.saveTaskList(taskList.getAllTasks());
         ui.showMarkDoneTask(taskList.getTask(taskNo));
@@ -42,12 +42,10 @@ public class DoneTaskCommand extends Command {
     public void setArguments(String arguments) throws BusinessException {
         validateArguments(arguments);
         try {
-            int taskNo = Integer.parseInt(arguments);
+            this.taskNo = Integer.parseInt(arguments) - 1;
         } catch (Exception e) {
             throw new BusinessException(Messages.MESSAGE_INVALID_COMMAND_FORMAT + "\n" + getMessageUsage());
         }
-
-        this.taskNo = taskNo - 1;
     }
 
 }
